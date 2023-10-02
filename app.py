@@ -1,7 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from pages import intro_page
-from pages.intro_page import run_intro_page
+from docx import Document
+from docx_page import run_intro_page
+from docx_page.run_intro_page import run_intro_page
 # Website's general configurations
 
 st.set_page_config(
