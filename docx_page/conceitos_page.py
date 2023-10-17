@@ -79,31 +79,169 @@ x \in X = \quad \{x \in \mathbb{R}^n : A x \leq b,  x \geq 0\}
 
 
     st.write('')
+   
 
-    st.write('')
-    st.write('')
-    st.write('')
-    st.write('')
-    st.write('')
-    st.write('')
-    st.write('')
-    st.write('')
-    st.write('')
-    st.write('')
-    st.write('')
+
+    st.title('Principais conceitos da Otimização Multiobjetivo:')
+    st.markdown(""" Para exemplificar os principais conceitos da Otimização 
+Multiobjetivo, vamos lidar com o problema(1) de otimização abaixo:
+""")
+ 
     st.latex(r"max f_1 = 25x_1 + 20x_1 \\"
              "max f_2 = x₁ + 8x₂")
     st.latex(r"""
-    \begin{cases}
+    \text{sujeito a (Região Factível $X$):}\begin{cases}
     x_1 + x_2 \leq 50 \\
     2x_1 + x_2 \leq 80 \\
     2x_1 + 5x_2 \leq 220 \\
     x_1,x_2 \geq 0
     \end{cases}
     """)
+    
 
 
 
+    st.subheader('Análise do problema:')
+    st.markdown('Antes de explorar os conceitos de um POM, vamos entender as características de tal problema:')
+    st.markdown("""
+  <strong>Região de Factibilidade:</strong> Região formada pelas desigualdades do problema de otimização, que também é denominada Espaço de Decisão; <br> <br> 
+<strong>Função de Decisão:</strong> São a(s) função(ões) que queremos maximizar ou minimizar, sujeito às restrições 
+                do problema; <br> <br> 
+<strong>Variáveis de Decisão:</strong> São as variáveis que modelam o problema de otimização. 
+""",unsafe_allow_html=True)
+    st.write("Neste exemplo, as restrições de desigualdade formam a seguinte região de factibilidade:")
+    x1 = [0,0, 10, 30,40]
+    x2 = [0,44, 40, 20,0]
 
-    st.write('Uma das principais áreas de pesquisa na matemática aplicada é a programação matemática. O objeto de estudo dessa área é a otimização de uma função, denominada função objetivo, que pode ser maximizada ou minimizada, de modo que tal função é sujeita a restrições que são representadas por desigualdades.')
-    st.subheader('Quais são as principais áreas de estudo da programação matemática na graduação?')
+    # Criando o gráfico interativo
+    fig = go.Figure()
+
+    # Adicionando a região
+    fig.add_trace(go.Scatter(x=x1, y=x2, fill='toself', fillcolor='rgb(169,169,169)', line=dict(color='rgb(92, 92, 92)'), name='Região Factível'))
+
+    # Adicionando a solução ótima 
+    fig.add_trace(go.Scatter(x=[0], y=[44], mode='markers', marker=dict(color='red', size=10), name='Solução Ótima x<sub>-</sub>=(0,44) considerando apenas max f<sub>2</sub>. Com f<sub>2</sub>(x<sub>-</sub>) = 352'))
+    fig.add_trace(go.Scatter(x=[30], y=[20], mode='markers', marker=dict(color='blue', size=10), name='Solução Ótima x<sub>+</sub> = (30,20) considerando apenas max f<sub>1</sub>. Com f<sub>1</sub>(x<sub>+</sub>) = 1150'))
+
+    #título
+    fig.update_layout(
+        title='Região Factível do problema(1)',
+        xaxis=dict(title='x<sub>1</sub>'),
+        yaxis=dict(title='x<sub>2</sub>')
+    )
+    st.plotly_chart(fig)
+    st.markdown('''Como pode-se ver no gráfico acima, temos, para cada uma das funções isoladas, uma solução 
+                única que maximiza cada uma destas funções, de forma a respeitar as restrições. Por fim, note que o melhor 
+                valor para $f_1$ é 1150 e para $f_2$ é 352. Mas será que existe um vetor $x_* \in X$ que maximize ambas as funções?  
+                 
+''')
+    st.markdown('Para responder tal pergunta, é necessário introduzir um novo conceito.')
+    st.subheader('Espaço Critério: ')
+    st.markdown("""
+    O  **Espaço Critério** $Z = \{z = f(x)\in \mathbb{R}^p : x \in X\}$ é o espaço formado pela aplicação de cada solução($x \in X$) em um vetor 
+                $z \in \mathbb{R}^p $. Ou seja, 
+                para cada $x \in X$, temos um vetor $z = (z_1,z_2,...,z_p) = f(x) = (f_1(x), f_2(x),...,f_p(x))$.
+""")
+    st.image('images\espaco_criterio.png')
+    st.write('Na figura acima temos o Espaço Decisão na esquerda e o Espaço Critério na direita.')
+    st.write(' ')
+    st.markdown('''**Exemplo do Problema(1):**''')
+    st.write(' ')
+    st.latex(r"max f_1 = 25x_1 + 20x_1 \\"
+             "max f_2 = x₁ + 8x₂")
+    st.latex(r"""
+    \text{$X$:}\begin{cases}
+    x_1 + x_2 \leq 50 \\
+    2x_1 + x_2 \leq 80 \\
+    2x_1 + 5x_2 \leq 220 \\
+    x_1,x_2 \geq 0
+    \end{cases}
+    """)
+    st.markdown("""Para encontrar o Espaço Critério do problema(1), devemos obter $x_1$ e $x_2$ em função
+                de $f_1$ e $f_2$ e substituir nas desigualdades de $X$:
+""")
+    st.latex(r"""
+    \begin{cases}
+    25x_1 + 20x_2 = f_1 \\
+    x_1 + 8x_2 = f_2
+    \end{cases} \Rightarrow  
+
+    \begin{cases}
+    x_1 = \frac{2f_1 - 5f_2}{45} \\
+    x_2 = \frac{25f_2 - z_1}{180}
+    \end{cases}             
+             """)
+    st.markdown("""Note que em alguns problemas não seria muito simples calcular $x_1,x_2$ em função de $z_1,z_2$.  
+                 Agora devemos substituir $x_1,x_2$ nas restrições de $X$:""")
+    
+    st.latex(r"""
+    \text{$X$:}\begin{cases}
+    x_1 + x_2 \leq 50 \\
+    2x_1 + x_2 \leq 80 \\
+    2x_1 + 5x_2 \leq 220 \\
+    x_1,x_2 \geq 0
+    \end{cases} \Rightarrow
+    \text{$Z$:}\begin{cases}
+    7f_1 + 5f_2 \leq 9000 \\
+    f_1 - f_2 \leq 960 \\
+    11f_1 + 85f_2 \leq 39600 \\
+    2f_1 - 5f_2 \geq 0 \\
+    25f_2 - f_1 \geq 0
+    \end{cases}     
+    """)
+
+    st.markdown(""" Com isso, obtemos o Espaço Critério para o problema (1). É evidente que há muito trabalho ao 
+                substituir os valores de $x_1,x_2$ nas desigualdades. Todavia, um software que pode facilitar este processo
+                é o [Wolfram Mathematica](https://www.citic.unicamp.br/mathematica), disponível para alunos da Unicamp.
+""")
+    st.write('')
+    st.markdown('Veja abaixo o gráfico do Espaço Critério do problema(1): ')
+
+    x1 = [0,880, 1050, 1150,1000,0]
+    x2 = [0,352, 330, 190,40,0]
+
+    # Criando o gráfico interativo
+    fig = go.Figure()
+
+    # Adicionando a região
+    fig.add_trace(go.Scatter(x=x1, y=x2, fill='toself', fillcolor='rgb(169,169,169)', line=dict(color='rgb(92, 92, 92)'), name='Região Factível'))
+
+    
+    #título
+    fig.update_layout(
+        title='Espaço Critério do problema(1)',
+        xaxis=dict(title='f<sub>1</sub>'),
+        yaxis=dict(title='f<sub>2</sub>')
+    )
+    st.plotly_chart(fig)
+
+    st.markdown("""
+Deste modo, temos que qualquer ponto $(f_1,f_2) \\notin Z$ não é correspondende com qualquer $(x_1,x_2) \in X$.
+""")
+    st.markdown("""
+Voltando a pergunta feita anteriormente: existe $(x_1,x_2) \in X$ de modo que possamos maximizar $(f_1, f_2)$  
+**Solução:** Basta verificar se o ponto $z = (f_1^*,f_2^*) = (1150,352) \in Z$:
+""")
+    x1 = [0,880, 1050, 1150,1000,0]
+    x2 = [0,352, 330, 190,40,0]
+
+    # Criando o gráfico interativo
+    fig = go.Figure()
+
+    # Adicionando a região
+    fig.add_trace(go.Scatter(x=x1, y=x2, fill='toself', fillcolor='rgb(169,169,169)', line=dict(color='rgb(92, 92, 92)'), name='Região Factível'))
+    fig.add_trace(go.Scatter(x=[1150], y=[352], mode='markers', marker=dict(color='red', size=10), name='"Solução" que Maximiza f<sub>1</sub> e f<sub>2</sub>'))
+
+    
+    #título
+    fig.update_layout(
+        title='Espaço Critério do problema(1)',
+        xaxis=dict(title='f<sub>1</sub>'),
+        yaxis=dict(title='f<sub>2</sub>')
+    )
+    st.plotly_chart(fig)
+    st.markdown("""
+Note que tal ponto não existe no Espaço Critério, Logo, não há uma representação em $X$ que retorne este
+                ponto "ótimo". Portanto, não existe $x=(x_1,x_2) \in X$ que maximize $f_1$ e $f_2$ simultaneamente.
+
+""")
