@@ -142,7 +142,7 @@ Multiobjetivo, vamos lidar com o problema(1) de otimização abaixo:
                 $z \in \mathbb{R}^p $. Ou seja, 
                 para cada $x \in X$, temos um vetor $z = (z_1,z_2,...,z_p) = f(x) = (f_1(x), f_2(x),...,f_p(x))$.
 """)
-    st.image('images/espaco_criterio.png')
+    st.image('images/espaco_criterio.PNG')
     st.write('Na figura acima temos o Espaço Decisão na esquerda e o Espaço Critério na direita.')
     st.write(' ')
     st.markdown('''**Exemplo do Problema(1):**''')
