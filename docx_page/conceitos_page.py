@@ -219,8 +219,8 @@ Multiobjetivo, vamos lidar com o problema(1) de otimização abaixo:
 Deste modo, temos que qualquer ponto $(f_1,f_2) \\notin Z$ não é correspondende com qualquer $(x_1,x_2) \in X$.
 """)
     st.markdown("""
-Voltando a pergunta feita anteriormente: existe $(x_1,x_2) \in X$ de modo que possamos maximizar $(f_1, f_2)$  
-**Solução:** Basta verificar se o ponto $z = (f_1^*,f_2^*) = (1150,352) \in Z$:
+Voltando a pergunta feita anteriormente: existe $(x_1,x_2) \in X$ de modo que possamos maximizar $(f_1, f_2)$?  
+**Solução:** Basta verificar se o ponto $z^* = (f_1^*,f_2^*) = (1150,352) \in Z$:
 """)
     x1 = [0,880, 1050, 1150,1000,0]
     x2 = [0,352, 330, 190,40,0]
@@ -242,6 +242,26 @@ Voltando a pergunta feita anteriormente: existe $(x_1,x_2) \in X$ de modo que po
     st.plotly_chart(fig)
     st.markdown("""
 Note que tal ponto não existe no Espaço Critério, Logo, não há uma representação em $X$ que retorne este
-                ponto "ótimo". Portanto, não existe $x=(x_1,x_2) \in X$ que maximize $f_1$ e $f_2$ simultaneamente.
+                ponto "ótimo". Portanto, não existe $x=(x_1,x_2) \in X$ que maximize $f_1$ e $f_2$ simultaneamente.  
+                Com isto em mente, vamos introduzir um novo conceito.
 
 """)
+    st.subheader('Solução Ideal:')
+    st.markdown(''' A solução ideal (também denominada de ponto utópico) $z^* = (z_1^*, z_2^*,...,z_p^*) \in \mathbb{R}^p$ 
+                é uma solução que otimiza todas as funções objetivo do problema de otimização. Ou seja, cada componente 
+                k desta solução é a solução ótima da função objetivo $f_k$ do problema de otimização. No exemplo anterior, tal solução
+                seria o ponto $z^*=(1150,352) \\notin Z$. Todavia, geralmente, não é possível obter tal solução de forma que a mesma 
+                seja correspondente a uma solução $x^* \in X$. Mas é possível determinar cada componente $z_k^*, k=1,...,p$.
+''')
+    st.title("Solução Eficiente e Relações de Dominância: ")
+    st.markdown(""" Aqui vamos abordar outros conceitos da Otimização Multiobjetivo.
+""")
+    st.subheader("Solução Eficiente:")
+    st.markdown(""" Uma solução $x^1 \in X$ é eficiente  se e somente não houver outra solução $x \in X$ e as seguintes
+                 condições devem ser satisfeitas: <br>
+                 <ol>
+                 <li> $f_j(x) \geq f_j(x^1)$ para todo $j=1,...,p$; 
+                 <li> $f_j(x) > f_j(x^1)$ para ao menos um j. 
+                <br>
+""",unsafe_allow_html=True)
+    st.markdown("Vamos denotar $X_e$ como sendo o conjunto de todas as soluções eficientes.")
