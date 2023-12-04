@@ -16,7 +16,7 @@ def run_conceitos_page():
                   possíveis soluções para o problema, de forma a respeitar todas as restrições impostas. """)
     st.markdown("""
         Com isso, por estarmos trabalhando com mais de uma função objetivo, tais funções
-          podem ser conflitantes? Por exemplo, pense que uma empresa que produz açúcar deseja maximizar seu lucro
+          podem ser conflitantes. Por exemplo, pense que uma empresa que produz açúcar deseja maximizar seu lucro
             e minimizar a emissão de CO2 na produção. É possível obter uma solução factível que otimize ambas as
               funções ao mesmo tempo? A resposta é: nem sempre. Basta lembrar que em problemas de Programação Linear
                 a maioria das soluções encontradas são vértices de um poliedro convexo. Logo, um vértice que otimiza uma 
@@ -257,11 +257,128 @@ Note que tal ponto não existe no Espaço Critério, Logo, não há uma represen
     st.markdown(""" Aqui vamos abordar outros conceitos da Otimização Multiobjetivo.
 """)
     st.subheader("Solução Eficiente:")
-    st.markdown(""" Uma solução $x^1 \in X$ é eficiente  se e somente não houver outra solução $x \in X$ e as seguintes
-                 condições devem ser satisfeitas: <br>
+    """
+    obs: Para definir uma solução eficiente, introduzi condições para o problema. Ou seja, não deve existir
+    x em X, de modo que os tópicos 1 e 2 sejam satisfeitos ao mesmo tempo.    
+    """
+    st.markdown(""" Uma solução $x^1 \in X$ é eficiente  se e somente não houver outra solução $x \in X$ de modo que: <br>
                  <ol>
                  <li> $f_j(x) \geq f_j(x^1)$ para todo $j=1,...,p$; 
-                 <li> $f_j(x) > f_j(x^1)$ para ao menos um j. 
-                <br>
+                 <li> $f_j(x) > f_j(x^1)$ para ao menos um $j$. 
+                <br> 
 """,unsafe_allow_html=True)
+    st.markdown('sejam satisfeitas.')
     st.markdown("Vamos denotar $X_e$ como sendo o conjunto de todas as soluções eficientes.")
+    st.subheader("Ponto não-dominado:")
+    st.markdown(""" 
+ Um ponto $z = (f_1(x),...,f_p(x)) \in Z$
+é dito não-dominado se e somente se $x$ é uma
+solução eficiente. O conjunto de pontos
+não dominados é definido como
+""",unsafe_allow_html=True)
+
+    st.latex(r'''
+Z_e = \{z =f(z) \in Z:x \in X_e \}
+''')
+    st.markdown("""<span style="color: red;">OUTRA ABORDAGEM</span>""",unsafe_allow_html=True)
+    st.title("Relações de Dominância: ")   
+    st.markdown(""" Considere duas soluções, $x^*$ e  $\overline{x}$, pertencentes
+ao espaço decisão $X$. A solução $x^*$ domina $\overline{x}$ se
+as seguintes condições são satisfeitas:
+    <ol>
+                 <li> $f_j(x^*) \geq f_j(\overline{x})$ para todo $j=1,...,p$; 
+                 <li> $f_j(x^*) > f_j(\overline{x})$ para ao menos um $j$.             
+""",unsafe_allow_html=True)
+    st.write("")
+    st.markdown("""
+<strong>Notação:</strong> $x^* \preceq \overline{x}$.
+""",unsafe_allow_html=True)
+    st.write("")
+    st.markdown("""
+<strong>Dominância Forte:</strong> A solução $x^*$ domina fortemente a solução $\overline{x}$ se:
+""",unsafe_allow_html=True)
+    st.latex(r"""
+f_j(x^*) > f_j(\overline{x}) \quad \text{para } j = 1,...,p
+""")
+    st.write(" ")
+    st.markdown("""
+<strong>Dominância Fraca:</strong> Dúvidas...
+
+""",unsafe_allow_html=True)
+    st.write(" ")
+    st.markdown("""
+<strong>solução Eficiente:</strong> a solução $x^*$ é dita eficiente se, e somente se, não existe 
+nenhum $x$ no espaço de decisão $X$, de modo que
+$x \preceq x^*$
+""", unsafe_allow_html=True)
+    
+    st.markdown("""
+<strong>Ponto não-dominado:</strong> o ponto $z(x) = (f_1(x),f_2(x),...,f_p(x)) \in Z$ 
+                é dito não dominado se, e somente se, $x$ é uma solução eficiente.
+""", unsafe_allow_html=True)
+    st.subheader('Exemplo: ')   
+    st.markdown("Considere o seguinte POM: ")     
+
+    st.latex(r"max f_1 = x_1 + x_2 \\"
+             "max f_2 = x_2")
+    st.latex(r"""
+    \text{s.a $X$:}\begin{cases}
+    x_1 + 2x_2 \leq 6 \\
+    x_1  \leq 2 \\
+    x_1,x_2 \geq 0
+    \end{cases}
+    """)
+    st.markdown("""Esboçe o espaço critério de tal problema e forneça às soluções 
+                eficientes e os pontos não-dominados.""")
+    st.markdown("""<strong>Solução:</strong> Tome $x_2 = f_2$ e $x_1 = f_1 - f_2$. Substituindo tais
+     variáveis no espaço decisão, obtemos:""",unsafe_allow_html=True)
+
+
+    st.latex(r"""
+    \text{$X$:}\begin{cases}
+    x_1 + 2x_2 \leq 6 \\
+    x_1  \leq 2 \\
+    x_1,x_2 \geq 0
+    \end{cases} \Rightarrow
+    \text{$Z$:}\begin{cases}
+    f_1 + f_2 \leq 6 \\
+    f_1 - f_2 \leq 2 \\
+    f_1 - f_2 \geq 0 \\
+    f_2  \geq 0
+    \end{cases}     
+    """)
+    x1 = [0,3, 4, 2,0]
+    x2 = [0,3, 2, 0,0]
+    reta_x1 = [3,4]
+    reta_x2 = [3,2]
+    # Criando o gráfico interativo
+    fig = go.Figure()
+    fig.add_annotation(
+            x=1,  # Posição x do início da seta
+            y=2,  # Posição y do início da seta
+            ax=0,  # Comprimento na direção x
+            ay=0,  # Comprimento na direção y
+            xref='x',
+            yref='y',
+            axref='x',
+            ayref='y',
+            showarrow=True,
+            arrowhead=2,
+            arrowsize=1,
+            arrowwidth=3,
+            arrowcolor='red'
+        )
+    # Adicionando a região
+    fig.add_trace(go.Scatter(x=x1, y=x2, fill='toself', fillcolor='Gainsboro', line=dict(color='rgb(92, 92, 92)'), name='Região Factível'))
+    fig.add_trace(go.Scatter(x=[4], y=[2], mode='markers', marker=dict(color='DeepSkyBlue', size=10), name='Ponto que Maximiza f<sub>1</sub>'))
+    fig.add_trace(go.Scatter(x=reta_x1, y=reta_x2, mode='lines', line=dict(color='SaddleBrown', width=3), name='Pontos Não-dominados de Z'))
+    fig.add_trace(go.Scatter(x=[3], y=[3], mode='markers', marker=dict(color='red', size=10), name='Ponto que Maximiza f<sub>2</sub>'))
+
+    #título
+    fig.update_layout(
+        title='Espaço Critério',
+        xaxis=dict(title='f<sub>1</sub>'),
+        yaxis=dict(title='f<sub>2</sub>')
+    )
+    st.plotly_chart(fig)
+   

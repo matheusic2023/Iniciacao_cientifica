@@ -63,3 +63,4 @@ elif page=='Métodos Exatos':
         run_metodos_page()               
 elif page=='Implementação Computacional':
         run_computacional_page()               
+
