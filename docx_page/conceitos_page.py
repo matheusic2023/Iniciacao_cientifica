@@ -8,7 +8,12 @@ import pandas as pd
 #aaaaaaaa
 def run_conceitos_page():
     st.title("Conceitos Gerais: ")
-    st.markdown('Nesta seção serão abordados os principais conceitos da otimização multiobjetivo.')
+    st.markdown(""" A base teórica para os conceitos apresentados nesta seção foi baseada no livro 
+                 [Multiobjective Linear and Integer Programming](https://link.springer.com/book/10.1007/978-3-319-28746-1), 
+                escrito pelos autores **Carlos Henggeler Antunes, Maria João Alves e João Clímaco**. 
+                Além disso, utilizamos os slides do
+                 [Curso de otimização multiobjetivo](http://paginapessoal.utfpr.edu.br/angeloaliano/curso-de-otimizacao-multiobjetivo), elaborado pelo autor **Angelo Aliano Filho**.
+  """,unsafe_allow_html=True)
     st.subheader('Motivação: ')
     st.markdown("""A programação multiobjetivo (POM) pode ser interpretada como uma extensão dos problemas de otimização
                  clássicos trabalhados na graduação, tendo em vista que trabalhamos com a mesma modelagem de restrições
