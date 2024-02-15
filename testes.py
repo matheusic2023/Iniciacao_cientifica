@@ -1,32 +1,52 @@
 import plotly.graph_objects as go
-"""
-    # Criando as coordenadas para o gráfico
-    x1 = [0, 0, 10, 30,40,0]
-    x2 = [0, 44, 40, 20,0,0]
+#aaaaa
+# Importar streamlit
+import streamlit as st
+import pandas as pd
+import numpy as np
+with open("styles.css") as f:
+        st.markdown(f"""<style>{f.read()}</style>""",unsafe_allow_html=True)
 
-    # Coordenadas do segmento de reta
-    #reta_x1 = [0, 10]
-    #reta_x2 = [44, 40]
+df = pd.DataFrame(np.random.randn(10, 5), columns=("col %d" % i for i in range(5)))
+#aa
+st.table(df)
 
-    # Criando o gráfico interativo
-    fig = go.Figure()
-    #name='x<sub>1</sub> + x<sub>2</sub> ≤ 2'
-    # Adicionando a região
-    fig.add_trace(go.Scatter(x=x1, y=x2, fill='toself', fillcolor='rgb(169,169,169)', line=dict(color='rgb(92, 92, 92)'), name='Região Factível'))
+st.markdown('''
+<style> table.edTable { width: 100%; font-family: 'Segoe UI Light'; font-size: 16px; } table, table.edTable th, table.edTable td { border: solid 1px #9b58b5; border-collapse: collapse; padding: 7px 3px; text-align: center; } table.edTable td { background-color: #a963c6; color: #ffffff; font-size: 16px; } table.edTable th { background-color : #9b58b5; color: #ffffff; } tr:hover td { background-color: #9b58b5; color: #dddddd; } </style>
 
-    # Adicionando a solução ótima (0,0)
-    fig.add_trace(go.Scatter(x=[0], y=[44], mode='markers', marker=dict(color='red', size=10), name='Solução Ótima (0,44) para f<sub>1</sub>'))
-    fig.add_trace(go.Scatter(x=[10], y=[40], mode='markers', marker=dict(color='blue', size=10), name='Solução Ótima (10,40) para f<sub>2</sub>'))
+<table class="edTable" id="eDnaTab">
+<tbody>
+  <tr>
+	<th>Header</th>
+	<th>Header</th>
+	<th>Header</th>
+  </tr>
+  <tr>
+	<td>row 1 [cell 1]</td>
+	<td>row 1 [cell 2]</td>
+	<td>row 1 [cell 3]</td>
+  </tr>
+  <tr>
+	<td>row 2 [cell 1]</td>
+	<td>row 2 [cell 2]</td>
+	<td>row 2 [cell 3]</td>
+  </tr>
+  <tr>
+	<td>row 3 [cell 1]</td>
+	<td>row 3 [cell 2]</td>
+	<td>row 3 [cell 3]</td>
+  </tr>
+  <tr>
+	<td>row 4 [cell 1]</td>
+	<td>row 4 [cell 2]</td>
+	<td>row 4 [cell 3]</td>
+  </tr>
+  <tr>
+	<td>row 5 [cell 1]</td>
+	<td>row 5 [cell 2]</td>
+	<td>row 5 [cell 3]</td>
+  </tr>
+</tbody>
+</table>
 
-    # Adicionando o segmento de reta
-    #fig.add_trace(go.Scatter(x=reta_x1, y=reta_x2, mode='lines', line=dict(color='blue', width=3), name='Segmento (0,2) até (2,0)'))
-
-    #título
-    fig.update_layout(
-        title='Região Factível do problema (1)',
-        xaxis=dict(title='x<sub>1</sub>'),
-        yaxis=dict(title='x<sub>2</sub>')
-    )
-
-    #gráfico no Streamlit
-    st.plotly_chart(fig)"""
+''',unsafe_allow_html=True)

@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from io import BytesIO
 import base64
 import pandas as pd
-
+#aaaaaaaa
 def run_conceitos_page():
     st.title("Conceitos Gerais: ")
     st.markdown('Nesta seção serão abordados os principais conceitos da otimização multiobjetivo.')
@@ -316,6 +316,18 @@ $x \preceq x^*$
 <strong>Ponto não-dominado:</strong> o ponto $z(x) = (f_1(x),f_2(x),...,f_p(x)) \in Z$ 
                 é dito não dominado se, e somente se, $x$ é uma solução eficiente.
 """, unsafe_allow_html=True)
+    st.markdown("""
+<strong>Conjunto Eficiente:</strong> o conjunto eficiente $X^*$ é formado por todos os elementos
+de $X$ que não são dominados por outros elementos de $X$. Em outras palavras,
+                 $X^* = \{x^* \in X : x \\npreceq x^*, \\forall x \in X \} $
+""", unsafe_allow_html=True)
+
+    st.markdown("""
+<strong>Fronteira de Pareto:</strong> a fronteira de pareto, denotada por $Z^*$ é a imagem do conjunto eficiente $X^*$
+                , ou seja, 
+                 $Z^* = \{z^* \in \mathbb{R}^p : z^* = f(x^*), \\forall x^* \in X^* \}$
+""", unsafe_allow_html=True)
+    
     st.subheader('Exemplo: ')   
     st.markdown("Considere o seguinte POM: ")     
 
@@ -374,6 +386,36 @@ $x \preceq x^*$
     fig.add_trace(go.Scatter(x=reta_x1, y=reta_x2, mode='lines', line=dict(color='SaddleBrown', width=3), name='Pontos Não-dominados de Z'))
     fig.add_trace(go.Scatter(x=[3], y=[3], mode='markers', marker=dict(color='red', size=10), name='Ponto que Maximiza f<sub>2</sub>'))
 
+    #título
+    fig.update_layout(
+        title='Espaço Critério',
+        xaxis=dict(title='f<sub>1</sub>'),
+        yaxis=dict(title='f<sub>2</sub>')
+    )
+    st.plotly_chart(fig)
+    
+    
+    x1 = [0,880, 1050, 1150,1000,0]
+    x2 = [0,352, 330, 190,40,0]
+
+    # Criando o gráfico interativo
+    fig = go.Figure()
+
+    # Adicionando a região
+    fig.add_trace(go.Scatter(x=[1], y=[2], mode='markers', marker=dict(color='red', size=10), name='Pontos dominados'))
+    fig.add_trace(go.Scatter(x=[2], y=[5], mode='markers', marker=dict(color='red', size=10), showlegend=False,name='Pontos dominados'))
+    fig.add_trace(go.Scatter(x=[3], y=[4], mode='markers', marker=dict(color='red', size=10), showlegend=False,name='Pontos dominados'))
+    fig.add_trace(go.Scatter(x=[4], y=[3], mode='markers', marker=dict(color='red', size=10), showlegend=False,name='Pontos dominados'))
+    fig.add_trace(go.Scatter(x=[5], y=[2], mode='markers', marker=dict(color='red', size=10), showlegend=False,name='Pontos dominados'))
+    fig.add_trace(go.Scatter(x=[3], y=[6], mode='markers', marker=dict(color='green', size=10), name='Pontos não-dominados'))
+    fig.add_trace(go.Scatter(x=[4], y=[5], mode='markers', marker=dict(color='green', size=10), showlegend=False,name='Pontos não-dominados'))
+    fig.add_trace(go.Scatter(x=[5], y=[4], mode='markers', marker=dict(color='green', size=10), showlegend=False,name='Pontos não-dominados'))
+    fig.add_trace(go.Scatter(x=[6], y=[3], mode='markers', marker=dict(color='green', size=10), showlegend=False,name='Pontos não-dominados'))
+    fig.add_trace(go.Scatter(x=[2], y=[6], mode='markers', marker=dict(color='blue', size=10), name='Pontos fracamente não-dominados'))
+    fig.add_trace(go.Scatter(x=[6], y=[2], mode='markers', marker=dict(color='blue', size=10), showlegend=False,name='Pontos fracamente não-dominados'))
+    
+    
+    
     #título
     fig.update_layout(
         title='Espaço Critério',
