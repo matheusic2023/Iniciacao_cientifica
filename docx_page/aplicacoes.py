@@ -13,7 +13,8 @@ def run_aplicacoes_page():
     st.title("Implementação Computacional e Aplicações")
 
     st.markdown(r"""
-    Nesta seção, abordamos a modelagem e a solução de Problemas de Otimização Multiobjetivo utilizando os métodos da soma ponderada e $\epsilon$-restrito. Desenvolvemos códigos específicos para cada um dos métodos, além de algoritmos que permitem a variação dos parâmetros de cada técnica. Para mais detalhes sobre o funcionamento de cada código, consulte o capítulo [Códigos](#codigos).
+    Nesta seção, abordamos a modelagem e a solução de Problemas de Otimização Multiobjetivo utilizando os métodos da soma ponderada e $\epsilon$-restrito. Desenvolvemos códigos específicos para cada um dos métodos, além de algoritmos que permitem a variação dos parâmetros de cada técnica. Para mais detalhes sobre o funcionamento de cada código, consulte o capítulo 
+    [Códigos](https://github.com/matheusic2023/Iniciacao_cientifica/tree/main/Algoritmos%20Oficiais).
     """, unsafe_allow_html=True)
 
     # Subseção: Problema do Transporte
