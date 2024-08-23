@@ -12,6 +12,10 @@ from docx_page.metodos import run_metodos_page
 
 from docx_page import computacional
 from docx_page.computacional import run_computacional_page
+
+from docx_page import aplicacoes
+from docx_page.aplicacoes import run_aplicacoes_page
+
 # Website's general configurations
 
 st.set_page_config(
@@ -44,8 +48,8 @@ st.sidebar.image("images/logoimecc.png", use_column_width = 'auto')
 
 with st.sidebar:
         page = option_menu(
-            "Menu", ['Apresentação', 'Conceitos Gerais','Métodos Exatos', 'Implementação Computacional','Informações'], 
-            icons = ['plus-circle-fill', 'book-fill','graph-up-arrow', 'pc-display-horizontal','info-circle-fill'],
+            "Menu", ['Apresentação', 'Conceitos Gerais','Métodos Exatos', 'Implementação Computacional','Aplicações','Informações'], 
+            icons = ['plus-circle-fill', 'book-fill','graph-up-arrow', 'pc-display-horizontal','diagram-3-fill','info-circle-fill'],
             menu_icon = "house",
             styles = {
                 "container": {"padding": "0!important", "background-color": "#D3D3D3"},                   
@@ -62,5 +66,7 @@ elif page=='Conceitos Gerais':
 elif page=='Métodos Exatos':
         run_metodos_page()               
 elif page=='Implementação Computacional':
-        run_computacional_page()               
+        run_computacional_page() 
+elif page=='Aplicações':
+        run_aplicacoes_page()              
 
